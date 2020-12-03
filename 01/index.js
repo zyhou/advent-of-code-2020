@@ -1,7 +1,9 @@
 // --- Day 1: Report Repair ---
 // https://adventofcode.com/2020/day/1
 
-const solveOne = (input) => {
+import fs from "fs";
+
+export const solveOne = (input) => {
   const list = input.split("\n").map((x) => parseInt(x, 10));
 
   for (let i = 0; i < list.length; i++) {
@@ -19,7 +21,7 @@ const solveOne = (input) => {
   throw new Error("No solution found!");
 };
 
-const solveTwo = (input) => {
+export const solveTwo = (input) => {
   const list = input.split("\n").map((x) => parseInt(x, 10));
 
   for (let i = 0; i < list.length; i++) {
@@ -44,12 +46,8 @@ const solveTwo = (input) => {
 };
 
 if (process.env.NODE_ENV !== "test") {
-  const fs = require("fs");
-  const path = require("path");
-  const data = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8");
+  const data = fs.readFileSync(new URL("input.txt", import.meta.url), "utf-8");
 
   console.log("Result one:", solveOne(data));
   console.log("Result two:", solveTwo(data));
 }
-
-module.exports = { solveOne, solveTwo };

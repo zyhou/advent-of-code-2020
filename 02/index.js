@@ -1,7 +1,9 @@
 // --- Day 2: Password Philosophy ---
 // https://adventofcode.com/2020/day/2
 
-const solveOne = (input) => {
+import fs from "fs";
+
+export const solveOne = (input) => {
   const list = input.split("\n").map((line) => {
     const [
       ,
@@ -29,7 +31,7 @@ const solveOne = (input) => {
   return list.filter(isPasswordVaild).length;
 };
 
-const solveTwo = (input) => {
+export const solveTwo = (input) => {
   const list = input.split("\n").map((line) => {
     const [
       ,
@@ -61,12 +63,8 @@ const solveTwo = (input) => {
 };
 
 if (process.env.NODE_ENV !== "test") {
-  const fs = require("fs");
-  const path = require("path");
-  const data = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8");
+  const data = fs.readFileSync(new URL("input.txt", import.meta.url), "utf-8");
 
   console.log("Result one:", solveOne(data));
   console.log("Result one:", solveTwo(data));
 }
-
-module.exports = { solveOne, solveTwo };

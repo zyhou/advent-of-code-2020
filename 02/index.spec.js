@@ -1,4 +1,4 @@
-const { solveOne, solveTwo } = require("./index");
+import { solveOne, solveTwo } from "./index";
 
 describe("Day 02", () => {
   describe("Solve One", () => {
