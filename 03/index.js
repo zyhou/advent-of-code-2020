@@ -1,7 +1,6 @@
 // --- Day 3: Toboggan Trajectory ---
 // https://adventofcode.com/2020/day/3
 
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from "constants";
 import fs from "fs";
 
 export const solveOne = (input, moveX, moveY) => {
