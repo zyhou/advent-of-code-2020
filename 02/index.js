@@ -66,5 +66,5 @@ if (process.env.NODE_ENV !== "test") {
   const data = fs.readFileSync(new URL("input.txt", import.meta.url), "utf-8");
 
   console.log("Result one:", solveOne(data));
-  console.log("Result one:", solveTwo(data));
+  console.log("Result two:", solveTwo(data));
 }
