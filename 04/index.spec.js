@@ -1,5 +1,4 @@
 import { solveOne, solveTwo, validationFields } from "./index";
-import fs from "fs";
 
 describe("Day 04", () => {
   describe("Solve One", () => {
