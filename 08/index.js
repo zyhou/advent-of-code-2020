@@ -4,7 +4,7 @@
 import fs from "fs";
 
 export const solveOne = (input) => {
-  const lines = input.split("\n");
+  const instructions = input.split("\n");
 
   let i = 0;
   let accumulator = 0;
@@ -16,7 +16,7 @@ export const solveOne = (input) => {
 
     alreadySeen.push(i);
 
-    const [operation, value] = lines[i].split(" ");
+    const [operation, value] = instructions[i].split(" ");
     const argument = parseInt(value, 10);
 
     if (operation === "nop") {
@@ -28,12 +28,56 @@ export const solveOne = (input) => {
       i += argument;
     }
   }
-
   return accumulator;
 };
 
 export const solveTwo = (input) => {
-  return 0;
+  const instructions = input.split("\n");
+
+  for (let index = 0; index < instructions.length; index++) {
+    const [, operation, symbol, value] = /([\w]+) ([+|-])([\d]+)/.exec(
+      instructions[index]
+    );
+    const argument = parseInt(value, 10);
+
+    if (operation === "acc") {
+      continue;
+    }
+
+    const updateInstruction = [...instructions];
+    updateInstruction.splice(
+      index,
+      1,
+      `${operation === "nop" ? "jmp" : "nop"} ${symbol}${argument}`
+    );
+
+    let i = 0;
+    let accumulator = 0;
+    const alreadySeen = [];
+    while (true) {
+      if (alreadySeen.includes(i)) {
+        break;
+      }
+
+      alreadySeen.push(i);
+
+      const [operation, value] = updateInstruction[i].split(" ");
+      const argument = parseInt(value, 10);
+
+      if (operation === "nop") {
+        i += 1;
+      } else if (operation === "acc") {
+        accumulator += argument;
+        i += 1;
+      } else if (operation === "jmp") {
+        i += argument;
+      }
+
+      if (i === updateInstruction.length) {
+        return accumulator;
+      }
+    }
+  }
 };
 
 if (process.env.NODE_ENV !== "test") {
