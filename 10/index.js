@@ -28,7 +28,20 @@ export const solveOne = (input) => {
 };
 
 export const solveTwo = (input) => {
-  return 0;
+  let numbers = input
+    .split("\n")
+    .map((line) => parseInt(line, 10))
+    .sort((a, z) => a - z);
+
+  const stepCounter = { 0: 1 };
+  for (let i = 0; i < numbers.length; i++) {
+    let j = i + 1;
+    while (numbers[j] <= numbers[i] + 3) {
+      stepCounter[j] = (stepCounter[j] || 0) + stepCounter[i];
+      j++;
+    }
+  }
+  return stepCounter[numbers.length - 1];
 };
 
 if (process.env.NODE_ENV !== "test") {
